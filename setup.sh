@@ -39,7 +39,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 # Reload profile
 source ~/.profile
 
-# Create virtual environment for OpenV development
+# Create virtual environment for OpenCV development
 mkvirtualenv cv
 
 # Install Python development tools
@@ -56,7 +56,17 @@ cd opencv-2.4.10
 # Setup the build
 mkdir build
 cd build
-cmake . -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_V4L=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON  -D BUILD_EXAMPLES=ON ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_V4L=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON  -D BUILD_EXAMPLES=ON ..
+
+# Install; make sure you are in the virtual environment before proceeding
+make
+sudo make install
+sudo ldconfig
+
+# Now link to python libraries
+cd ~/$ENV/lib/python2.7/site-packages/
+ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so
+ln -s /usr/local/lib/python2.7/site-packages/cv.py cv.py
 
 # Reboot to apply changes, and use updated firmware
 sudo reboot

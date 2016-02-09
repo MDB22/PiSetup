@@ -92,9 +92,6 @@ sudo reboot
 #sudo ldconfig
 
 # Now link to python libraries
-cd ~/$ENV/lib/python2.7/site-packages/
-ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so
-ln -s /usr/local/lib/python2.7/site-packages/cv.py cv.py
-
-# Reboot to apply changes, and use updated firmware
-sudo reboot
+#cd ~/$ENV/lib/python2.7/site-packages/
+#ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so
+#ln -s /usr/local/lib/python2.7/site-packages/cv.py cv.py

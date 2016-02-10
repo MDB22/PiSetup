@@ -1,12 +1,15 @@
 #!/bin/bash/
 
-# Establosh logging for Pi Setup process
+# Establish logging for Pi Setup process
 LOG="virtual_env_install.log"
 exec &> >(tee $LOG)
 
 # Create useful variables
-PYTHON="python_env"
+PYTHON="pyEnv"
 PROJECT="outback_challenge"
+
+# Return to root of user directory
+cd ~
 
 # Step 0:
 # Update Pi and package list
@@ -24,6 +27,10 @@ sudo rm -rf ~/.cache/pip
 echo "** Building/Rebuilding python virtual environment **"
 rm -rf $PYTHON
 
+echo "** Creating directory structure **"
+mkdir $PROJECT
+cd $PROJECT
+
 echo "** Create virtual environment **"
 virtualenv -p /usr/bin/python2.7 $PYTHON
 source $PYTHON/bin/activate
@@ -37,10 +44,8 @@ pip install dronekit
 
 sudo usermod -a -G dialout,kmem $USER
 
-cd $PROJECT
-
 echo "** Profile setup **"
-echo "source ~/$PROJECT/python_env/bin/activate" >> ~/.profile
+echo "source ~/$PROJECT/$PYTHON/bin/activate" >> ~/.profile
 echo "cd ~/$PROJECT" >> ~/.profile
 echo "export PYTHONPATH=~/$PROJECT/modules" >> ~/.profile
 echo "export PYTHONPATH=$PYTHONPATH:~/$PROJECT/tests" >> ~/.profile

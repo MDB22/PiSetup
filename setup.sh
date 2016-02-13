@@ -8,8 +8,9 @@ exec &> >(tee $LOG)
 PYTHON="pyEnv"
 PROJECT="outback_challenge"
 
-# Return to root of user directory
+# Return to root of user directory, remove previous environment setup
 cd ~
+rm -rfv $PROJECT
 
 # Step 0:
 # Update Pi and package list

@@ -31,6 +31,11 @@ echo "** Creating directory structure **"
 mkdir $PROJECT
 cd $PROJECT
 
+mkdir "tests"
+mkdir "scripts"
+mkdir "modules"
+mkdir "documentation"
+
 echo "** Create virtual environment **"
 virtualenv -p /usr/bin/python2.7 $PYTHON
 source $PYTHON/bin/activate
@@ -39,8 +44,8 @@ echo "** Dronekit for UAV development **"
 sudo apt-get -y build-dep python-serial python-pyparsing python-numpy
 
 pip install pyserial pyparsing numpy
-
 pip install dronekit
+pip install dronekit-sitl -UI
 
 sudo usermod -a -G dialout,kmem $USER
 
